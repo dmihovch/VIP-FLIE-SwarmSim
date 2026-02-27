@@ -7,14 +7,13 @@ services:
     environment:
       - DISPLAY=${DISPLAY}
       - XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR}
-      - WAYLAND_DISPLAY=${WAYLAND_DISPLAY}
+     # - WAYLAND_DISPLAY=${WAYLAND_DISPLAY}
       - QT_X11_NO_MITSHM=1
     volumes:
-      # Share the Wayland and X11 sockets
+      #share the X11 and wayland thigh high sock(et)s
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - ${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY:-wayland-0}:/tmp/wayland-0:rw
-      # Mount your project folder to the container
-      - .:/home/school/drones/VIP-FLIE-SwarmSim:rw
+      - .:/home/developer/ros2_ws:rw
     devices:
       - /dev/dri:/dev/dri # GPU Passthrough
     tty: true
